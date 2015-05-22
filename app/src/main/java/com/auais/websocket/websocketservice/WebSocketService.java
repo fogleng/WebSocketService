@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.IBinder;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.Gravity;
 import android.widget.Toast;
@@ -44,6 +45,9 @@ public class WebSocketService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
+        //从Setting 中 获取 房号 和 服务器 IP
+        room_address = "3201150001" + Settings.Global.getString(getApplicationContext().getContentResolver(), "engineering_room_addr");
+        server_ip = Settings.Global.getString(getApplicationContext().getContentResolver(), "engineering_server_ip");
 
         //注册 ACTION_TIME_TICK BroadcastReceive 。
         IntentFilter filter = new IntentFilter(Intent.ACTION_TIME_TICK);
@@ -67,7 +71,7 @@ public class WebSocketService extends Service {
             mConnection.connect(wsuri, new WebSocketConnectionHandler() {
                 @Override
                 public void onOpen() {
-                    String s = "{\"cmd\":\"login\",\"params\":{\"identity\":{\"app\":\"manage.apk.auais.com\",\"id\":\"" + room_address + "1" + "\"}}}";
+                    String s = "{\"cmd\":\"login\",\"params\":{\"identity\":{\"app\":\"door.apk.auais.com\",\"id\":\"" + room_address + "1" + "\"}}}";
 
                     //注册上服务器。
                     mConnection.sendTextMessage(s);
