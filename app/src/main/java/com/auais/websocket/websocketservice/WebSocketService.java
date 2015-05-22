@@ -71,7 +71,7 @@ public class WebSocketService extends Service {
             mConnection.connect(wsuri, new WebSocketConnectionHandler() {
                 @Override
                 public void onOpen() {
-                    String s = "{\"cmd\":\"login\",\"params\":{\"identity\":{\"app\":\"indoor.apk.auais.com\",\"id\":\"" + room_address + "1" + "\"}}}";
+                    String s = "{\"cmd\":\"login\",\"params\":{\"identity\":{\"app\":\"door.apk.auais.com\",\"id\":\"" + room_address + "1" + "\"}}}";
 
                     //注册上服务器。
                     mConnection.sendTextMessage(s);
