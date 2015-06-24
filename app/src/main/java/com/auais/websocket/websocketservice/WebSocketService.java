@@ -70,7 +70,7 @@ public class WebSocketService extends Service {
             mConnection.connect(wsuri, new WebSocketConnectionHandler() {
                 @Override
                 public void onOpen() {
-                    String s = "{\"cmd\":\"login\",\"params\":{\"identity\":{\"app\":\"indoor.apk.auais.com\",\"id\":\"" + room_address + "1" + "\"}}}";
+                    String s = "{\"cmd\":\"login\",\"params\":{\"identity\":{\"app\":\"indoor.android.auais.com\",\"id\":\"" + room_address + "1" + "\"}}}";
 
                     //注册上服务器。
                     mConnection.sendTextMessage(s);
@@ -167,6 +167,7 @@ public class WebSocketService extends Service {
                     Logger.d("Websocket 连接中");
                 } else {
                     Logger.d("检测 到 Websocket 连接断开 开始重连");
+                    mConnection.disconnect();
                     start();
                 }
             }
